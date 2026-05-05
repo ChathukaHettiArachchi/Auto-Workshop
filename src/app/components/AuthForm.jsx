@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 
 export default function AuthForm({ type }) {
   const isLogin = type === "signin";
@@ -48,7 +49,7 @@ const handleSubmit = async (e) => {
 
     if (isLogin) {
       localStorage.setItem("token", data.token);
-      alert("Login successful");
+      // alert("Login successful");
 
       // redirect
       window.location.href = "/";
@@ -65,12 +66,24 @@ const handleSubmit = async (e) => {
 
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-[#dbe6ea] to-[#7fc3d6]">
+    <div className="flex min-h-screen items-center justify-center">
+     
+      
+      <Image
+        src="/loginimage.png"
+        alt="Background"
+        fill
+        className="object-cover"
+        priority
+      />
+       <div className="absolute inset-0 bg-black/50"></div>
+       
+      
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-md rounded-2xl border border-gray-400 p-8 shadow-xl hover:shadow-2xl transition-all duration-300  bg-gray-200"
+        className="relative w-full max-w-md rounded-2xl border border-white/20 p-8 shadow-xl  bg-white/10 backdrop-blur-lg"
       >
-        <h2 className="mb-6 text-center text-black text-2xl font-bold">
+        <h2 className="mb-6 text-center text-white text-2xl font-bold">
           {isLogin ? "Sign In" : "Sign Up"}
         </h2>
 
@@ -78,7 +91,7 @@ const handleSubmit = async (e) => {
           <input
             type="text"
             placeholder="Name"
-            className="mb-4 w-full rounded-lg border p-3 text-black"
+            className="mb-4 w-full rounded-lg border border-white/20 p-3 text-gray-200"
             onChange={(e) => setForm({ ...form, name: e.target.value })}
           />
         )}
@@ -86,25 +99,25 @@ const handleSubmit = async (e) => {
         <input
           type="email"
           placeholder="Email"
-          className="mb-4 w-full rounded-lg border p-3 text-black"
+          className="mb-4 w-full rounded-lg border border-white/20 p-3 text-gray-200"
           onChange={(e) => setForm({ ...form, email: e.target.value })}
         />
 
         <input
           type="password"
           placeholder="Password"
-          className="mb-6 w-full rounded-lg border p-3 text-black"
+          className="mb-6 w-full rounded-lg border border-white/20 p-3 text-gray-200"
           onChange={(e) => setForm({ ...form, password: e.target.value })}
         />
 
         <button
           type="submit"
-          className="w-full rounded-lg bg-blue-500 p-3 text-white hover:bg-blue-600"
+          className="w-full rounded-lg bg-blue-500 p-3 text-white hover:bg-blue-600 cursor-pointer"
         >
           {isLogin ? "Login" : "Register"}
         </button>
 
-        <p className="mt-4 text-center text-black text-sm">
+        <p className="mt-4 text-center text-gray-200 text-sm">
           {isLogin ? "Don't have an account?" : "Already have an account?"}
           <a
             href={isLogin ? "/signup" : "/signin"}
